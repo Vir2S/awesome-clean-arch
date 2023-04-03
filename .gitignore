@@ -1,0 +1,42 @@
+# Compiled Object files, Static and Dynamic libs (Shared Objects)
+*.o
+*.a
+
+# Folders
+_vendor/
+vendor/
+.idea/
+.vscode/
+test/
+tmp/
+log/
+bin/
+build/
+coverage/
+dist/
+
+# Binary files
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Debug files
+*.test
+*.out
+
+# Linux-specific files
+*~
+.#*
+*#
+*.swp
+*.swo
+*.bak
+*.d
+*.pyc
+
+# Other
+.DS_Store
+Thumbs.db
+*.log
