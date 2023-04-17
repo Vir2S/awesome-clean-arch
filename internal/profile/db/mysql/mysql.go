@@ -20,17 +20,20 @@ func formatQuery(q string) string {
 }
 
 func (r *mysqlRepository) Create(ctx context.Context, p profile.Profile) (string, error) {
-	q := `
-START TRANSACTION;
+	q := `START TRANSACTION;
 INSERT INTO user (username) VALUES (?);
 SET @user_id = LAST_INSERT_ID();
 INSERT INTO user_profile (user_id, first_name, last_name, phone, address, city) 
 VALUES (@user_id, ?, ?, ?, ?, ?);
 INSERT INTO user_data (user_id, school) VALUES (@user_id, ?);
 COMMIT;
-	`
+`
 
 	r.logger.Trace(fmt.Sprintf("SQL Query: %s", formatQuery(q)))
+
+	r.logger.Infoln("p.ID = ", p.ID, "p.Username = ", p.Username, "p.FirstName = ", p.FirstName,
+		"p.LastName = ", p.LastName, "p.Phone = ", p.Phone, "p.Address = ", p.Address,
+		"p.City = ", p.City, "p.School = ", p.School)
 
 	res, err := r.client.ExecContext(ctx, q, p.Username, p.FirstName, p.LastName, p.Phone, p.Address, p.City, p.School)
 	if err != nil {
